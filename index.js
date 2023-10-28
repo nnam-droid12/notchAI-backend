@@ -1,11 +1,15 @@
 const express = require('express')
 const app = express()
-const port = 5000 || process.env.PORT
 const cors = require('cors') 
 const bodyParser = require('body-parser')
-
+const dotenv = require('dotenv')
 const mongoose = require('mongoose')
-mongoose.connect("mongodb://localhost:27017/notchdb")
+
+dotenv.config()
+
+mongoose.connect(process.env.MONGO_URL)
+.then(() => console.log('db connected'))
+.catch((err) => console.log(err));
 
 
 app.use(bodyParser.urlencoded({extended: true}))
@@ -14,8 +18,8 @@ app.use(bodyParser.json())
 
 app.use('/', require('./routes/user.routes'))
 
+app.get('/', (req, res) => res.send('Welcome to notchAI'))
 
 
-app.listen(port, () => {
-   console.log(`Server running on port ${port}`)
-})
+app.listen(process.env.PORT || 4000, 
+   console.log(`Server running on port ${process.env.PORT}`))
