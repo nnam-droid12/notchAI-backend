@@ -9,6 +9,7 @@ router.post('/signup', (req, res) => {
                 res.json({ message: "Email already exist" });
             } else {
                 const user = new User({
+                    name: req.body.name,
                     email: req.body.email,
                     password: req.body.password
                 });
