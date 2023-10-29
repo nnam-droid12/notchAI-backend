@@ -18,6 +18,7 @@ app.use(cors())
 app.use(bodyParser.json())
 
 app.use('/', require('./routes/user.routes'))
+app.use('/', require('./routes/doctor.routes'))
 
 app.get('/', (req, res) => res.send('Welcome to notchAI'))
 
